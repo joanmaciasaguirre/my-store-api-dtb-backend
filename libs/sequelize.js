@@ -4,20 +4,22 @@ const { config } = require('../config/config');
 
 const { setupModels } = require('../dtb/models');
 
-const USER = encodeURIComponent(config.POSTGRES_USER);
-const PASSWORD = encodeURIComponent(config.POSTGRES_PASSWORD);
 
- // si tenemis base de datos en la nube
-// const URI = `postgres://${USER}:${PASSWORD}@${confi.POSTGRES_DB}:${PORT}/${DB_NAME}`;
+const options = {
+  dialect: 'postgres',
+  logging: config.isProd ? false: true,
+}
 
-const URI = `postgres://${USER}:${PASSWORD}@${config.POSTGRES_HOST}:${config.POSTGRES_PORT}/${config.POSTGRES_DB}`;
-
-
-  const sequelize = new Sequelize(URI, {
-    dialect: 'postgres',
-    logging: true
+if(config.isProd){
+  options.dialectOptions={
+    ssl:{
+      rejectUnauthorized: false
+    }
   }
-  );
+
+}
+
+  const sequelize = new Sequelize(config.dbUrl, options  );
   // corremos despues de la instancia de sequelize
   setupModels(sequelize);
 
