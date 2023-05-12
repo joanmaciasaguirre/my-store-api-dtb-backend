@@ -1,0 +1,26 @@
+module.exports = {
+  //saber cuales la conexion a la base de datos
+  "config": "./dtb/config.js",
+  //donde escontrara los modelos de la base de datos
+  "models-path": "./dtb/models",
+  //donde va encontrar los migraciones
+  "migrations-path": "./dtb/migrations",
+  //donde va encontrar los seeders es elset de datos de prueba
+  "seeders-path": "./dtb/seeders"
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
